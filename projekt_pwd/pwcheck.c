@@ -45,13 +45,13 @@ int main(){
 	}
 
 
-	int num_lowercase; // pocet malych pismen v hesle
-	int num_uppercase; // pocet velkych pismen v hesle
-	int num_numbers; //  pocet cisel v hesle
+	int num_lowercase = 0; // pocet malych pismen v hesle
+	int num_uppercase = 0; // pocet velkych pismen v hesle
+	int num_numbers = 0; //  pocet cisel v hesle
 
 	//cyklus pro vypocitani poctu malych, velkych pismen a cisel 
-
-	for(int i = 0; pwd[i] != '\0'; i++){
+	int i;
+	for(i = 0; pwd[i] != '\0'; i++){
 		if(pwd[i] <= 'z' && pwd[i] >= 'a'){
 			num_lowercase += 1;
 		} //else 
@@ -62,6 +62,7 @@ int main(){
 			num_numbers += 1;
 		}
 	}
+
 	if(num_lowercase > 0 && num_uppercase > 0){
 		printf("Heslo obsahuje dostatecny pocet velkych a malych pismen.\n");
 	}
