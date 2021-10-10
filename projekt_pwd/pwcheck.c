@@ -27,44 +27,61 @@ int main(){
 	int pwd_length = 0;
 	int pwd_length_correct = 0;
 
+	int num_lowercase = 0; // pocet malych pismen v hesle
+	int num_uppercase = 0; // pocet velkych pismen v hesle
+	int num_numbers = 0; //  pocet cisel v hesle
+
 	while(pwd_length_correct == 0){
 		while(pwd[pwd_length] != '\0'){
 			pwd_length++;
 		}
 		printf("pwd_length = %d\n", pwd_length);
 
+		/* Nasledujici podminky kontroluji, zda-li je v hesle dostatecny pocet velkych a malych cisel.*/
+		
+
+		//cyklus pro vypocitani poctu malych, velkych pismen a cisel 
+		int i;
+		for(i = 0; pwd[i] != '\0'; i++){
+			if(pwd[i] <= 'z' && pwd[i] >= 'a'){
+				num_lowercase += 1;
+			} //else 
+			if(pwd[i] <= 'Z' && pwd[i] >= 'A') {
+				num_uppercase += 1;
+			} //else 
+			if((pwd[i] >= '0') && (pwd[i] <= '9')){
+				num_numbers += 1;
+			}
+		}
+
+		if(num_lowercase > 0 && num_uppercase > 0){
+			printf("Heslo obsahuje dostatecny pocet velkych a malych pismen.\n");
+		}
+		
+
+		
 		if(pwd_length > 100){
 			printf("Heslo je prilis dlouhe! Zadejte kratsi heslo. Maximalni delka hesla je 100 znaku. \n" );
 
 			printf("Zadejte heslo: \n");
 			scanf("%s", &pwd);
 			pwd_length = 0;
+
+		} else if(num_lowercase < 1){
+			printf("Nedostatecny pocet malych pismen.\n");
+			
+			printf("Zadejte heslo: \n");
+			scanf("%s", &pwd);
+			pwd_length = 0;
+		} else if(num_uppercase < 1){
+			printf("Nedostatecny pocet velkych pismen.\n");
+			
+			printf("Zadejte heslo: \n");
+			scanf("%s", &pwd);
+			pwd_length = 0;
 		} else {
 			pwd_length_correct = 1;
 		}
-	}
-
-
-	int num_lowercase = 0; // pocet malych pismen v hesle
-	int num_uppercase = 0; // pocet velkych pismen v hesle
-	int num_numbers = 0; //  pocet cisel v hesle
-
-	//cyklus pro vypocitani poctu malych, velkych pismen a cisel 
-	int i;
-	for(i = 0; pwd[i] != '\0'; i++){
-		if(pwd[i] <= 'z' && pwd[i] >= 'a'){
-			num_lowercase += 1;
-		} //else 
-		if(pwd[i] <= 'Z' && pwd[i] >= 'A') {
-			num_uppercase += 1;
-		} //else 
-		if((pwd[i] >= '0') && (pwd[i] <= '9')){
-			num_numbers += 1;
-		}
-	}
-
-	if(num_lowercase > 0 && num_uppercase > 0){
-		printf("Heslo obsahuje dostatecny pocet velkych a malych pismen.\n");
 	}
 
 	printf("Zadane heslo je %s\n", &pwd);
